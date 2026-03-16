@@ -1,193 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Idea Generator</title>
 
-<title>Business Idea Generator</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #2f2214 0%, #1c1712 18%, #151311 45%, #121212 100%);
+      color: #f4ead7;
+      text-align: center;
+      padding: 36px 18px 60px;
+      min-height: 100vh;
+    }
 
-body{
-font-family: Arial, sans-serif;
-background:#F5F1E8;
-color:#2B2B2B;
-text-align:center;
-padding:40px;
-}
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, #f6eee1 0%, #efe1cb 100%);
+      color: #2b241c;
+      padding: 32px 22px 28px;
+      border-radius: 24px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(214, 178, 104, 0.35);
+    }
 
-.container{
-max-width:600px;
-margin:auto;
-}
+    .title-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
 
-h1{
-margin-bottom:10px;
-}
+    .logo-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #dcb668, #9b6b2f);
+      color: #fff8ee;
+      font-size: 20px;
+      box-shadow: 0 8px 18px rgba(156, 108, 40, 0.28);
+    }
 
-select,input{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:1px solid #ccc;
-font-size:16px;
-}
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      line-height: 1.15;
+      color: #241d17;
+      letter-spacing: -0.5px;
+    }
 
-button{
-background:#C6A96B;
-border:none;
-padding:14px 20px;
-border-radius:10px;
-cursor:pointer;
-font-size:16px;
-margin-top:10px;
-}
+    p#subtitle {
+      margin: 10px 0 26px;
+      color: #5d5042;
+      font-size: 1.05rem;
+    }
 
-.result{
-margin-top:30px;
-text-align:left;
-background:white;
-padding:20px;
-border-radius:10px;
-}
+    .field-label {
+      text-align: left;
+      display: block;
+      font-weight: 700;
+      margin: 16px 0 8px;
+      color: #3d3125;
+      font-size: 0.95rem;
+    }
 
-.idea{
-margin-bottom:10px;
-padding:10px;
-border-bottom:1px solid #eee;
-}
+    select,
+    input {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 0;
+      border-radius: 14px;
+      border: 1px solid #d7c3a1;
+      font-size: 16px;
+      outline: none;
+      background: #fffaf2;
+      color: #2b241c;
+      transition: all 0.2s ease;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
+    }
 
-</style>
+    select:focus,
+    input:focus {
+      border-color: #b88234;
+      box-shadow: 0 0 0 4px rgba(184, 130, 52, 0.14);
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 22px;
+    }
+
+    button {
+      border: none;
+      padding: 14px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    #generateBtn {
+      background: linear-gradient(135deg, #d6a84f, #9c6a26);
+      color: #fff9f0;
+      box-shadow: 0 10px 20px rgba(156, 106, 38, 0.22);
+      min-width: 200px;
+    }
+
+    #copyBtn {
+      background: #2d241b;
+      color: #f7ead2;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.14);
+      min-width: 180px;
+      display: none;
+    }
+
+    .result {
+      margin-top: 28px;
+      text-align: left;
+      background: #fffaf4;
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid #ead6b4;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.55);
+      display: none;
+    }
+
+    .result-title {
+      margin: 0 0 16px;
+      color: #8b5e1b;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .idea {
+      margin-bottom: 16px;
+      padding: 16px 16px 18px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffdf9 0%, #f8f0e3 100%);
+      border: 1px solid #eddcbc;
+      line-height: 1.55;
+    }
+
+    .idea:last-child {
+      margin-bottom: 0;
+    }
+
+    .idea-name {
+      display: block;
+      color: #2e241a;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .idea-desc {
+      display: block;
+      color: #4b3c2e;
+      margin-bottom: 10px;
+    }
+
+    .idea-why {
+      display: block;
+      color: #7a5b34;
+      font-style: italic;
+    }
+
+    .footer-note {
+      margin-top: 26px;
+      color: #6b5c49;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 20px 12px 40px;
+      }
+
+      .container {
+        padding: 24px 16px 22px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      .logo-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 17px;
+      }
+
+      .btn-row {
+        flex-direction: column;
+      }
+
+      #generateBtn,
+      #copyBtn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="container">
+    <div class="title-wrap">
+      <span class="logo-icon">✦</span>
+      <h1 id="title">Business Idea Generator</h1>
+      <span class="logo-icon">✦</span>
+    </div>
 
-<div class="container">
+    <p id="subtitle">Generate business ideas in seconds</p>
 
-<h1 id="title">Business Idea Generator</h1>
-<p id="subtitle">Generate business ideas in seconds</p>
+    <label class="field-label" id="languageLabel" for="language">Language</label>
+    <select id="language" onchange="updateLanguage()">
+      <option value="en">English</option>
+      <option value="pt">Português</option>
+    </select>
 
-<select id="language" onchange="updateLanguage()">
-<option value="en">English</option>
-<option value="pt">Português</option>
-</select>
+    <label class="field-label" id="interestLabel" for="interest">Industry or interest</label>
+    <input id="interest" placeholder="Industry or interest" />
 
-<input id="interest" placeholder="Industry or interest">
+    <div class="btn-row">
+      <button id="generateBtn" onclick="generateIdeas()">Generate Ideas</button>
+      <button id="copyBtn" onclick="copyIdeas()">Copy Ideas</button>
+    </div>
 
-<button id="generateBtn" onclick="generateIdeas()">Generate Ideas</button>
+    <div id="result" class="result"></div>
 
-<div id="result" class="result"></div>
+    <div class="footer-note" id="footerNote">Smart tools for modern entrepreneurs</div>
+  </div>
 
-<button id="copyBtn" onclick="copyIdeas()">Copy Ideas</button>
+  <script>
+    function updateLanguage() {
+      let language = document.getElementById("language").value;
 
-</div>
+      if (language === "pt") {
+        document.getElementById("title").innerText = "Gerador de Ideias de Negócio";
+        document.getElementById("subtitle").innerText = "Gera ideias de negócio em segundos";
+        document.getElementById("languageLabel").innerText = "Idioma";
+        document.getElementById("interestLabel").innerText = "Indústria ou interesse";
+        document.getElementById("interest").placeholder = "Ex.: contabilidade, beleza, fitness, comida";
+        document.getElementById("generateBtn").innerText = "Gerar Ideias";
+        document.getElementById("copyBtn").innerText = "Copiar Ideias";
+        document.getElementById("footerNote").innerText = "Ferramentas inteligentes para empreendedores modernos";
+      } else {
+        document.getElementById("title").innerText = "Business Idea Generator";
+        document.getElementById("subtitle").innerText = "Generate business ideas in seconds";
+        document.getElementById("languageLabel").innerText = "Language";
+        document.getElementById("interestLabel").innerText = "Industry or interest";
+        document.getElementById("interest").placeholder = "E.g. accounting, beauty, fitness, food";
+        document.getElementById("generateBtn").innerText = "Generate Ideas";
+        document.getElementById("copyBtn").innerText = "Copy Ideas";
+        document.getElementById("footerNote").innerText = "Smart tools for modern entrepreneurs";
+      }
+    }
 
-<script>
+    function generateIdeas() {
+      let interest = document.getElementById("interest").value.trim();
+      let language = document.getElementById("language").value;
 
- function updateLanguage() {
-  let language = document.getElementById("language").value;
+      if (interest === "") {
+        if (language === "pt") {
+          alert("Introduz um interesse.");
+        } else {
+          alert("Please enter an interest.");
+        }
+        return;
+      }
 
-if (language === "pt") {
-  document.getElementById("title").innerText = "Gerador de Ideias de Negócio";
-  document.getElementById("subtitle").innerText = "Gera ideias de negócio em segundos";
-  document.getElementById("interest").placeholder = "Indústria ou interesse";
-  document.getElementById("generateBtn").innerText = "Gerar Ideias";
-  document.getElementById("copyBtn").innerText = "Copiar Ideias";
-} else {
-  document.getElementById("title").innerText = "Business Idea Generator";
-  document.getElementById("subtitle").innerText = "Generate business ideas in seconds";
-  document.getElementById("interest").placeholder = "Industry or interest";
-  document.getElementById("generateBtn").innerText = "Generate Ideas";
-  document.getElementById("copyBtn").innerText = "Copy Ideas";
-}
+      const interestCapitalized =
+        interest.charAt(0).toUpperCase() + interest.slice(1);
 
-function generateIdeas(){
+      let ideas_en = [
+        {
+          name: interestCapitalized + " Templates Store",
+          desc: "Sell ready-to-use spreadsheets, planners, trackers, checklists or business templates related to " + interest + ".",
+          why: "Practical digital tools save time and are easy to scale."
+        },
+        {
+          name: interestCapitalized + " Mini Course",
+          desc: "Create a short and practical online course teaching the essentials of " + interest + " for beginners or small business owners.",
+          why: "People prefer focused learning that gives quick results."
+        },
+        {
+          name: interestCapitalized + " Consulting Service",
+          desc: "Offer a niche consulting service for clients who need guidance, structure or implementation support in " + interest + ".",
+          why: "Specialized services are easier to position and sell at better prices."
+        },
+        {
+          name: interestCapitalized + " Content Brand",
+          desc: "Build a content page around " + interest + " and monetize through services, partnerships, ebooks or digital products.",
+          why: "Niche audiences trust creators who consistently teach and help."
+        },
+        {
+          name: interestCapitalized + " Membership Hub",
+          desc: "Create a subscription-based community with resources, tips, live sessions and exclusive materials around " + interest + ".",
+          why: "Recurring revenue models are attractive and build loyal audiences."
+        }
+      ];
 
-let interest = document.getElementById("interest").value;
-let language = document.getElementById("language").value;
+      let ideas_pt = [
+        {
+          name: "Loja de Templates de " + interestCapitalized,
+          desc: "Vender folhas de cálculo, planners, trackers, checklists ou modelos digitais relacionados com " + interest + ".",
+          why: "Ferramentas práticas poupam tempo e são fáceis de escalar."
+        },
+        {
+          name: "Mini Curso de " + interestCapitalized,
+          desc: "Criar um curso online curto e prático para ensinar o essencial de " + interest + " a iniciantes ou pequenos empresários.",
+          why: "As pessoas preferem aprendizagem objetiva e com resultados rápidos."
+        },
+        {
+          name: "Serviço de Consultoria em " + interestCapitalized,
+          desc: "Oferecer um serviço de consultoria de nicho para clientes que precisam de orientação, estrutura ou apoio de implementação em " + interest + ".",
+          why: "Serviços especializados são mais fáceis de posicionar e vender por valores melhores."
+        },
+        {
+          name: "Marca de Conteúdo sobre " + interestCapitalized,
+          desc: "Criar uma página de conteúdo sobre " + interest + " e monetizar através de serviços, parcerias, ebooks ou produtos digitais.",
+          why: "Audiências de nicho confiam mais em quem ensina e ajuda com consistência."
+        },
+        {
+          name: "Comunidade de Subscrição de " + interestCapitalized,
+          desc: "Criar uma comunidade paga com recursos, dicas, sessões ao vivo e materiais exclusivos sobre " + interest + ".",
+          why: "Modelos de receita recorrente são atrativos e criam audiências fiéis."
+        }
+      ];
 
-if(interest === ""){
-alert("Please enter an interest / Introduz um interesse");
-return;
-}
+      let ideas = language === "en" ? ideas_en : ideas_pt;
+      let html = "";
 
-let ideas_en = [
-{
-name: "Accounting Templates Store",
-desc: "Sell ready-to-use accounting spreadsheets, trackers, and business templates.",
-why: "Small business owners want practical tools that save time."
-},
-{
-name: "Accounting for Freelancers",
-desc: "Offer specialized accounting support and digital guides for freelancers and self-employed professionals.",
-why: "Freelancers often need simple and accessible financial help."
-},
-{
-name: "Finance Mini Course",
-desc: "Create a short online course teaching the essentials of " + interest + " in a practical way.",
-why: "People prefer fast and focused learning solutions."
-},
-{
-name: "Niche Consulting Service",
-desc: "Build a consulting service focused on businesses that need help with " + interest + ".",
-why: "Specialized services are easier to position and sell."
-},
-{
-name: "Digital Content Brand",
-desc: "Create a content page around " + interest + " and monetize through ebooks, services, and partnerships.",
-why: "Strong niche content can attract trust and recurring revenue."
-}
-];
+      if (language === "pt") {
+        html += "<div class='result-title'>Ideias geradas para: <b>" + interestCapitalized + "</b></div>";
+      } else {
+        html += "<div class='result-title'>Ideas generated for: <b>" + interestCapitalized + "</b></div>";
+      }
 
-let ideas_pt = [
-{
-name: "Loja de Templates de Contabilidade",
-desc: "Vender folhas de cálculo, trackers e modelos prontos a usar relacionados com " + interest + ".",
-why: "Pequenos empresários procuram ferramentas práticas que lhes poupem tempo."
-},
-{
-name: "Contabilidade para Freelancers",
-desc: "Oferecer apoio especializado e guias digitais para freelancers e trabalhadores independentes.",
-why: "Muitos freelancers precisam de ajuda financeira simples e acessível."
-},
-{
-name: "Mini Curso de Finanças",
-desc: "Criar um curso online curto que ensine o essencial de " + interest + " de forma prática.",
-why: "As pessoas preferem soluções de aprendizagem rápidas e objetivas."
-},
-{
-name: "Serviço de Consultoria de Nicho",
-desc: "Criar um serviço de consultoria focado em negócios que precisam de apoio em " + interest + ".",
-why: "Serviços especializados são mais fáceis de posicionar e vender."
-},
-{
-name: "Marca de Conteúdo Digital",
-desc: "Criar uma página de conteúdo sobre " + interest + " e monetizar com ebooks, serviços e parcerias.",
-why: "Conteúdo de nicho forte pode atrair confiança e receita recorrente."
-}
-];
+      ideas.forEach(function (idea, index) {
+        html += "<div class='idea'>";
+        html += "<span class='idea-name'><b>" + (index + 1) + ". " + idea.name + "</b></span>";
+        html += "<span class='idea-desc'>" + idea.desc + "</span>";
+        html += "<span class='idea-why'>" + idea.why + "</span>";
+        html += "</div>";
+      });
 
-let ideas = language === "en" ? ideas_en : ideas_pt;
+      document.getElementById("result").innerHTML = html;
+      document.getElementById("result").style.display = "block";
+      document.getElementById("copyBtn").style.display = "inline-block";
+    }
 
-let html = "";
+    function copyIdeas() {
+      let resultText = document.getElementById("result").innerText;
+      let language = document.getElementById("language").value;
 
-ideas.forEach(function(idea, index){
+      if (!resultText.trim()) {
+        if (language === "pt") {
+          alert("Ainda não há ideias para copiar.");
+        } else {
+          alert("There are no ideas to copy yet.");
+        }
+        return;
+      }
 
-html += "<div class='idea'>";
-html += "<b>" + (index+1) + ". " + idea.name + "</b><br><br>";
-html += "<span>" + idea.desc + "</span><br><br>";
-html += "<i>" + idea.why + "</i>";
-html += "</div>";
+      navigator.clipboard.writeText(resultText).then(function () {
+        if (language === "pt") {
+          alert("Ideias copiadas!");
+        } else {
+          alert("Ideas copied!");
+        }
+      });
+    }
 
-});
-
-document.getElementById("result").innerHTML = html;
-
-}
-updateLanguage();
-  
-</script>
-
+    updateLanguage();
+  </script>
 </body>
 </html>
