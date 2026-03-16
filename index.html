@@ -95,19 +95,59 @@ return;
 }
 
 let ideas_en = [
-"Online course about " + interest,
-"Niche blog focused on " + interest,
-"Subscription community for people interested in " + interest,
-"Local consulting service related to " + interest,
-"Digital product or ebook about " + interest
+{
+name: "Accounting Templates Store",
+desc: "Sell ready-to-use accounting spreadsheets, trackers, and business templates.",
+why: "Small business owners want practical tools that save time."
+},
+{
+name: "Accounting for Freelancers",
+desc: "Offer specialized accounting support and digital guides for freelancers and self-employed professionals.",
+why: "Freelancers often need simple and accessible financial help."
+},
+{
+name: "Finance Mini Course",
+desc: "Create a short online course teaching the essentials of " + interest + " in a practical way.",
+why: "People prefer fast and focused learning solutions."
+},
+{
+name: "Niche Consulting Service",
+desc: "Build a consulting service focused on businesses that need help with " + interest + ".",
+why: "Specialized services are easier to position and sell."
+},
+{
+name: "Digital Content Brand",
+desc: "Create a content page around " + interest + " and monetize through ebooks, services, and partnerships.",
+why: "Strong niche content can attract trust and recurring revenue."
+}
 ];
 
 let ideas_pt = [
-"Curso online sobre " + interest,
-"Blog de nicho sobre " + interest,
-"Comunidade de subscrição sobre " + interest,
-"Serviço de consultoria relacionado com " + interest,
-"Ebook ou produto digital sobre " + interest
+{
+name: "Loja de Templates de Contabilidade",
+desc: "Vender folhas de cálculo, trackers e modelos prontos a usar relacionados com " + interest + ".",
+why: "Pequenos empresários procuram ferramentas práticas que lhes poupem tempo."
+},
+{
+name: "Contabilidade para Freelancers",
+desc: "Oferecer apoio especializado e guias digitais para freelancers e trabalhadores independentes.",
+why: "Muitos freelancers precisam de ajuda financeira simples e acessível."
+},
+{
+name: "Mini Curso de Finanças",
+desc: "Criar um curso online curto que ensine o essencial de " + interest + " de forma prática.",
+why: "As pessoas preferem soluções de aprendizagem rápidas e objetivas."
+},
+{
+name: "Serviço de Consultoria de Nicho",
+desc: "Criar um serviço de consultoria focado em negócios que precisam de apoio em " + interest + ".",
+why: "Serviços especializados são mais fáceis de posicionar e vender."
+},
+{
+name: "Marca de Conteúdo Digital",
+desc: "Criar uma página de conteúdo sobre " + interest + " e monetizar com ebooks, serviços e parcerias.",
+why: "Conteúdo de nicho forte pode atrair confiança e receita recorrente."
+}
 ];
 
 let ideas = language === "en" ? ideas_en : ideas_pt;
@@ -116,7 +156,11 @@ let html = "";
 
 ideas.forEach(function(idea, index){
 
-html += "<div class='idea'><b>" + (index+1) + ".</b> " + idea + "</div>";
+html += "<div class='idea'>";
+html += "<b>" + (index+1) + ". " + idea.name + "</b><br><br>";
+html += "<span>" + idea.desc + "</span><br><br>";
+html += "<i>" + idea.why + "</i>";
+html += "</div>";
 
 });
 
