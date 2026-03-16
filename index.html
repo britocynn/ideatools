@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Business Idea Generator</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#F5F1E8;
+color:#2B2B2B;
+text-align:center;
+padding:40px;
+}
+
+.container{
+max-width:600px;
+margin:auto;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+select,input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:8px;
+border:1px solid #ccc;
+font-size:16px;
+}
+
+button{
+background:#C6A96B;
+border:none;
+padding:14px 20px;
+border-radius:10px;
+cursor:pointer;
+font-size:16px;
+margin-top:10px;
+}
+
+.result{
+margin-top:30px;
+text-align:left;
+background:white;
+padding:20px;
+border-radius:10px;
+}
+
+.idea{
+margin-bottom:10px;
+padding:10px;
+border-bottom:1px solid #eee;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Business Idea Generator</h1>
+<p>Generate business ideas in seconds</p>
+
+<select id="language">
+<option value="en">English</option>
+<option value="pt">Português</option>
+</select>
+
+<input id="interest" placeholder="Industry or interest">
+
+<button onclick="generateIdeas()">Generate Ideas</button>
+
+<div id="result" class="result"></div>
+
+</div>
+
+<script>
+
+function generateIdeas(){
+
+let interest = document.getElementById("interest").value;
+let language = document.getElementById("language").value;
+
+if(interest === ""){
+alert("Please enter an interest / Introduz um interesse");
+return;
+}
+
+let ideas_en = [
+"Online course about " + interest,
+"Niche blog focused on " + interest,
+"Subscription community for people interested in " + interest,
+"Local consulting service related to " + interest,
+"Digital product or ebook about " + interest
+];
+
+let ideas_pt = [
+"Curso online sobre " + interest,
+"Blog de nicho sobre " + interest,
+"Comunidade de subscrição sobre " + interest,
+"Serviço de consultoria relacionado com " + interest,
+"Ebook ou produto digital sobre " + interest
+];
+
+let ideas = language === "en" ? ideas_en : ideas_pt;
+
+let html = "";
+
+ideas.forEach(function(idea, index){
+
+html += "<div class='idea'><b>" + (index+1) + ".</b> " + idea + "</div>";
+
+});
+
+document.getElementById("result").innerHTML = html;
+
+}
+
+</script>
+
+</body>
+</html>
