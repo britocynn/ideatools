@@ -84,6 +84,22 @@ border-bottom:1px solid #eee;
 
 <script>
 
+ function updateLanguage() {
+  let language = document.getElementById("language").value;
+
+  if (language === "pt") {
+    document.getElementById("title").innerText = "Gerador de Ideias de Negócio";
+    document.getElementById("subtitle").innerText = "Gera ideias de negócio em segundos";
+    document.getElementById("interest").placeholder = "Indústria ou interesse";
+    document.getElementById("generateBtn").innerText = "Gerar Ideias";
+  } else {
+    document.getElementById("title").innerText = "Business Idea Generator";
+    document.getElementById("subtitle").innerText = "Generate business ideas in seconds";
+    document.getElementById("interest").placeholder = "Industry or interest";
+    document.getElementById("generateBtn").innerText = "Generate Ideas";
+  }
+} 
+
 function generateIdeas(){
 
 let interest = document.getElementById("interest").value;
